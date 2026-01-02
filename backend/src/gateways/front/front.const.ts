@@ -1,1 +1,1 @@
-export const FE = '/fe'
+export const FE = '/fe';

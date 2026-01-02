@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { FrontGatewayModule } from './gateways/front/front.module'
-import { AdminGatewayModule } from './gateways/admin/admin.module'
-import { ConfigModule, ConfigService } from '@nestjs/config'
+import { FrontGatewayModule } from './gateways/front/front.module';
+import { AdminGatewayModule } from './gateways/admin/admin.module';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 
 @Module({
   imports: [
@@ -12,7 +12,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config'
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
-      useFactory: (config: ConfigService)=>({
+      useFactory: (config: ConfigService) => ({
         type: 'postgres',
         host: config.get('DB_HOST'),
         port: config.get('DB_POST'),
@@ -22,7 +22,6 @@ import { ConfigModule, ConfigService } from '@nestjs/config'
         autoLoadEntities: true,
         synchronize: true, // set to false in production
       }),
-      
     }),
     FrontGatewayModule,
     AdminGatewayModule,

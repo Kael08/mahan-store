@@ -1,1 +1,1 @@
-export const AD = '/AD'
+export const AD = '/AD';
