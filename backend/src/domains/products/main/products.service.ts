@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { ProductsEntity } from './entities/products.entity';
 import { TProducts, TCreateProducts, TUpdateProducts } from '../public.types';
 import { Repository } from 'typeorm';
-import { S3Service } from 'src/common/s3/s3.service'
+import { S3Service } from 'src/common/s3/s3.service';
 
 @Injectable()
 export class ProductsService {
@@ -24,34 +24,34 @@ export class ProductsService {
   async create(data: TCreateProducts): Promise<TProducts> {
     let imageUrl: string | undefined;
 
-    if(data.image){
-      imageUrl = await this.s3Service.uploadFile(data.image)
-      delete (data as any).image
+    if (data.image) {
+      imageUrl = await this.s3Service.uploadFile(data.image);
+      delete (data as any).image;
     }
 
     const product = this.repo.create({
-      ...data, 
-      imageUrl
+      ...data,
+      imageUrl,
     });
 
     return this.repo.save(product);
   }
 
   async update(id: number, data: TUpdateProducts): Promise<TProducts> {
-    let imageUrl: string | undefined
+    let imageUrl: string | undefined;
 
-    if(data.image){
-      imageUrl = await this.s3Service.uploadFile(data.image)
+    if (data.image) {
+      imageUrl = await this.s3Service.uploadFile(data.image);
       delete (data as any).image;
-      
-      const oldProduct = await this.repo.findOneBy({id})
-      if(oldProduct?.imageUrl) {
+
+      const oldProduct = await this.repo.findOneBy({ id });
+      if (oldProduct?.imageUrl) {
         const oldKey = oldProduct.imageUrl.split('/').slice(-1)[0];
-        await this.s3Service.deleteFile(oldKey)
+        await this.s3Service.deleteFile(oldKey);
       }
     }
 
-    await this.repo.update(id, {...data, imageUrl});
+    await this.repo.update(id, { ...data, imageUrl });
     return this.repo.findOneByOrFail({ id });
   }
 

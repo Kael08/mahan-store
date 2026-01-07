@@ -4,9 +4,7 @@ import { TProducts, TCreateProducts, TUpdateProducts } from './public.types';
 
 @Injectable()
 export class ProductsPublicService {
-  constructor(
-    private readonly productsService: ProductsService,
-  ) {}
+  constructor(private readonly productsService: ProductsService) {}
 
   async findAll(): Promise<TProducts[]> {
     return this.productsService.findAll();

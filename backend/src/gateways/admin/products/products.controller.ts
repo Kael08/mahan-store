@@ -37,7 +37,7 @@ export class ProductsController {
     @Body() createDto: CreateProductDto,
     @UploadedFile() image: Express.Multer.File,
   ): Promise<TProducts> {
-    return this.productsPublicService.create({...createDto, image});
+    return this.productsPublicService.create({ ...createDto, image });
   }
 
   @Patch(':id')
@@ -47,12 +47,10 @@ export class ProductsController {
     @Body() updateDto: UpdateProductDto,
     @UploadedFile() image?: Express.Multer.File,
   ): Promise<TProducts> {
-    return this.productsPublicService.update(
-      id, {
-        ...updateDto,
-        image
-      }
-    );
+    return this.productsPublicService.update(id, {
+      ...updateDto,
+      image,
+    });
   }
 
   @Delete(':id')

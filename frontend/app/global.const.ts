@@ -1,1 +1,1 @@
-export const pathDev = 'http://localhost:3000'
+export const pathDev = 'http://localhost:3000';
