@@ -18,7 +18,6 @@ export default async function HomePage() {
 
   return (
     <main>
-      <h1>Arise Fashion</h1>
       <div>
         <h1>Список товары</h1>
         {products.length === 0 ? (

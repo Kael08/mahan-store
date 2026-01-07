@@ -1,15 +1,12 @@
 @import "tailwindcss";
 
+@theme {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -22,5 +19,27 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer components {
+  .navbar {
+    @apply bg-white sticky top-0 z-10;
+  }
+
+  .navbar-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center;
+  }
+
+  .navbar-ariseFashion-font {
+    @apply text-3xl text-stone-950 font-extralight;
+  }
+
+  .navbar-aboutUs-font {
+    @apply text-stone-950 font-extralight;
+  }
+
+  .nav-link {
+    @apply text-gray-700 hover:text-indigo-600 transition;
+  }
 }
