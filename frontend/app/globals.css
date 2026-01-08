@@ -28,7 +28,7 @@ body {
   }
 
   .navbar-container {
-    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center;
+    @apply max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center;
   }
 
   .navbar-ariseFashion-font {
@@ -41,5 +41,41 @@ body {
 
   .nav-link {
     @apply text-gray-700 hover:text-indigo-600 transition;
+  }
+
+  .body {
+    @apply min-h-screen
+  }
+
+  .products-container {
+    @apply min-h-[90vh] max-w-5xl mx-auto px-4 py-8
+  }
+
+  .products-grid {
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 py-8;
+  }
+
+  .product-card {
+    @apply bg-white
+  }
+
+  .footer {
+    @apply bg-zinc-900 text-white font-extralight py-8 text-center
+  }
+
+  .about-container {
+    @apply min-h-[90vh] max-w-5xl mx-auto px-4 py-8
+  }
+
+  .about-name-font {
+    @apply text-3xl text-stone-950 font-bold;
+  }
+
+  .about-text-font {
+    @apply py-8 space-y-6 leading-relaxed
+  }
+
+  .product-detail-container {
+    @apply min-h-[90vh] max-w-5xl mx-auto px-4 py-8
   }
 }

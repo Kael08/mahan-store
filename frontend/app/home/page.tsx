@@ -18,14 +18,14 @@ export default async function HomePage() {
 
   return (
     <main>
-      <div>
-        <h1>Список товары</h1>
+      <div className='products-container'>
+        <h1>Список товаров</h1>
         {products.length === 0 ? (
-          <p>Нет продуктов</p>
+          <p>Пусто...</p>
         ) : (
-          <ul>
+          <ul className="products-grid">
             {products.map((product: any) => (
-              <li key={product.id}>
+              <li key={product.id} className='product-card'>
                 <Link href={`/products/${product.id}`}>
                   <h2>{product.title}</h2>
                   {product.description}

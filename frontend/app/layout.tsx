@@ -9,7 +9,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ru">
-      <body>
+      <body className='body'>
         <header className="navbar">
           <nav className="navbar-container" >
             <div/> {/*Пустой div, нужный для равновесия вселенной */}
@@ -22,6 +22,9 @@ export default function RootLayout({
           </nav>
         </header>
         {children}
+        <footer className='footer'>
+          © 2026 Arise Fashion. Все права защищены.
+        </footer>
       </body>
     </html>
   );
