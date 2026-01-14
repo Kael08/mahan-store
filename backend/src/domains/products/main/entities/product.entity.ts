@@ -7,7 +7,7 @@ import {
   ManyToOne,
   OneToMany,
 } from 'typeorm';
-import { SellerEntity } from 'src/domains/sellers/main/entities/sellers.entity';
+import { SellerEntity } from 'src/domains/sellers/main/entities/seller.entity';
 import { CategoryEntity } from 'src/domains/categories/main/entities/categories.entity';
 import { BrandEntity } from 'src/domains/brands/main/entities/brands.entity';
 import { ProductVariantEntity } from 'src/domains/productVariants/main/entities/productVariants.entity';

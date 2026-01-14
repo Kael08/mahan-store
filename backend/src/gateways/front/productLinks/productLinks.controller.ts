@@ -5,6 +5,6 @@ import { ProductLinksPublicService } from 'src/domains/productLinks/public.servi
 @Controller(`${FE}/productLinks`)
 export class ProductLinksController {
   constructor(
-    private readonly productLinksPublicService: ProductLinksController,
+    private readonly productLinksPublicService: ProductLinksPublicService,
   ) {}
 }

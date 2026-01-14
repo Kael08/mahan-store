@@ -7,6 +7,7 @@ import {
 } from 'typeorm';
 import { ProductEntity } from 'src/domains/products/main/entities/product.entity';
 
+@Entity('product_links')
 export class ProductLinkEntity {
   @PrimaryGeneratedColumn()
   id: number;
