@@ -1,16 +1,16 @@
-import { ProductsEntity } from './main/entities/products.entity';
+import { ProductEntity } from './main/entities/product.entity';
 
-export type TProducts = ProductsEntity;
+export type TProducts = ProductEntity;
 
 export type TCreateProducts = Omit<
-  ProductsEntity,
+  ProductEntity,
   'id' | 'createdAt' | 'updatedAt'
 > & {
   image: Express.Multer.File;
 };
 
 export type TUpdateProducts = Partial<
-  Omit<ProductsEntity, 'id' | 'createdAt' | 'updatedAt'>
+  Omit<ProductEntity, 'id' | 'createdAt' | 'updatedAt'>
 > & {
   image?: Express.Multer.File;
 };
