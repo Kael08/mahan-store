@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { ProductsService } from './main/products.service';
-import { TProducts, TCreateProducts, TUpdateProducts } from './public.types';
+import { TProducts, TCreateProduct, TUpdateProduct } from './public.types';
 
 @Injectable()
 export class ProductsPublicService {

@@ -9,3 +9,11 @@ export type TCreateSeller = Omit<
   password: string;
   image?: Express.Multer.File;
 };
+
+export type TUpdateSeller = Omit<
+  SellerEntity,
+  'id' | 'createdAt' | 'updatedAt' | 'products' | 'passwordHash'
+> & {
+  password: string;
+  image?: Express.Multer.File;
+};

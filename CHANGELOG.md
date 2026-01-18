@@ -41,3 +41,8 @@
 ### 9
 
 - Создание продавца
+
+### 10
+
+- Docker-compose для бекенда
+- Методы delete и update для sellers
