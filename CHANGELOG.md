@@ -46,3 +46,8 @@
 
 - Docker-compose для бекенда
 - Методы delete и update для sellers
+
+### 11
+
+- Таблица refresh_tokens в БД
+- Авторизация для продавцов

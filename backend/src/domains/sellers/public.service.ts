@@ -14,6 +14,10 @@ export class SellersPublicService {
     return this.service.findOneById(id);
   }
 
+  async findOneByEmail(email: string): Promise<TSeller> {
+    return this.service.findOneByEmail(email);
+  }
+
   async create(data: TCreateSeller): Promise<TSeller> {
     return this.service.create(data);
   }

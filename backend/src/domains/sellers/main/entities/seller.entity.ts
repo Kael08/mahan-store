@@ -7,6 +7,7 @@ import {
   OneToMany,
 } from 'typeorm';
 import { ProductEntity } from 'src/domains/products/main/entities/product.entity';
+import { RefreshTokenEntity } from 'src/domains/auth/entities/refreshToken.entity';
 
 @Entity('sellers')
 export class SellerEntity {
@@ -56,4 +57,7 @@ export class SellerEntity {
 
   @OneToMany(() => ProductEntity, (product) => product.seller)
   products: ProductEntity[];
+
+  @OneToMany(() => RefreshTokenEntity, (refreshToken) => refreshToken.seller)
+  refreshTokens: RefreshTokenEntity[];
 }

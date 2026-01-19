@@ -13,6 +13,8 @@ import { ProductVariantsModule } from 'src/domains/productVariants/productVarian
 import { ProductVariantsController } from './productVariants/productVariants.controller';
 import { SellersModule } from 'src/domains/sellers/sellers.module';
 import { SellersController } from './sellers/sellers.controller';
+import { AuthModule } from 'src/domains/auth/auth.module';
+import { AuthController } from './auth/auth.controller';
 
 @Module({
   imports: [
@@ -23,6 +25,7 @@ import { SellersController } from './sellers/sellers.controller';
     ProductLinksModule,
     ProductVariantsModule,
     SellersModule,
+    AuthModule,
   ],
   controllers: [
     ProductsController,
@@ -33,6 +36,7 @@ import { SellersController } from './sellers/sellers.controller';
     ProductLinksController,
     ProductVariantsController,
     SellersController,
+    AuthController,
   ],
 })
 export class AdminGatewayModule {}

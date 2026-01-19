@@ -22,6 +22,10 @@ export class SellersService {
     return this.repo.findOneByOrFail({ id });
   }
 
+  async findOneByEmail(email: string): Promise<TSeller> {
+    return this.repo.findOneByOrFail({ email });
+  }
+
   async create(data: TCreateSeller): Promise<TSeller> {
     let avatarUrl: string | undefined;
 
