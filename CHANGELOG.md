@@ -57,3 +57,7 @@
 - Админ панель
 - Исправлена ошибка удаления картинок при patch
 - BrandsService
+
+### 13
+
+- CategoriesService
