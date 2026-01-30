@@ -71,4 +71,19 @@ export class S3Service {
       }),
     );
   }
+
+  extractKeyFromUrl(url: string): string {
+    try {
+      const urlObj = new URL(url);
+      const pathParts = urlObj.pathname.substring(1).split('/');
+      return pathParts.slice(1).join('/');
+    } catch {
+      const parts = url.split('/');
+      const bucketIndex = parts.findIndex((part) => part === this.bucket);
+      if (bucketIndex !== -1 && bucketIndex < parts.length - 1) {
+        return parts.slice(bucketIndex + 1).join('/');
+      }
+      return url;
+    }
+  }
 }

@@ -32,7 +32,7 @@ export class SellersService {
     if (data.image) {
       avatarUrl = await this.s3Service.uploadFile(
         data.image,
-        `sellers/${Date.now()}-avatar`,
+        `sellers/${Date.now()}-${data.name}`,
       );
       delete (data as any).image;
     }
@@ -58,11 +58,13 @@ export class SellersService {
     if (data.image) {
       avatarUrl = await this.s3Service.uploadFile(
         data.image,
-        `sellers/${Date.now()}-avatar`,
+        `sellers/${Date.now()}-${data.email}`,
       );
 
       if (existingSeller.avatarUrl) {
-        const oldKey = existingSeller.avatarUrl.split('/').pop()!;
+        const oldKey = this.s3Service.extractKeyFromUrl(
+          existingSeller.avatarUrl,
+        );
         await this.s3Service.deleteFile(oldKey);
       }
 

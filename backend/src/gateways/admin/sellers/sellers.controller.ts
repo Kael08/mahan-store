@@ -34,6 +34,11 @@ export class SellersController {
     return this.sellersPublicService.findAll();
   }
 
+  @Get(':id')
+  async findOneById(@Param('id', ParseIntPipe) id: number) {
+    return this.sellersPublicService.findOneById(id);
+  }
+
   @Patch(':id')
   @UseInterceptors(FileInterceptor('image'))
   async update(

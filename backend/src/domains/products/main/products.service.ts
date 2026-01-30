@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ProductEntity } from './entities/product.entity';
-import { TProducts, TCreateProduct, TUpdateProduct } from '../public.types';
+import { TProduct, TCreateProduct, TUpdateProduct } from '../public.types';
 import { Repository } from 'typeorm';
 import { S3Service } from 'src/common/s3/s3.service';
 
@@ -13,15 +13,15 @@ export class ProductsService {
     private readonly s3Service: S3Service,
   ) {}
 
-  // async findAll(): Promise<TProducts[]> {
-  //   return this.repo.find();
-  // }
+  async findAll(): Promise<TProduct[]> {
+    return this.repo.find();
+  }
 
-  // async findOneById(id: number): Promise<TProducts> {
-  //   return this.repo.findOneByOrFail({ id });
-  // }
+  async findOneById(id: number): Promise<TProduct> {
+    return this.repo.findOneByOrFail({ id });
+  }
 
-  // async create(data: TCreateProducts): Promise<TProducts> {
+  // async create(data: TCreateProduct): Promise<TProducts> {
   //   let imageUrl: string | undefined;
 
   //   if (data.image) {
@@ -37,7 +37,7 @@ export class ProductsService {
   //   return this.repo.save(product);
   // }
 
-  // async update(id: number, data: TUpdateProducts): Promise<TProducts> {
+  // async update(id: number, data: TUpdateProduct): Promise<TProducts> {
   //   let imageUrl: string | undefined;
 
   //   if (data.image) {
@@ -55,7 +55,7 @@ export class ProductsService {
   //   return this.repo.findOneByOrFail({ id });
   // }
 
-  // async delete(id: number): Promise<void> {
-  //   await this.repo.delete(id);
-  // }
+  async delete(id: number): Promise<void> {
+    await this.repo.delete(id);
+  }
 }

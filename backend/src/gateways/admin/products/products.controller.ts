@@ -14,22 +14,22 @@ import { AD } from '../admin.const';
 import { ProductsPublicService } from 'src/domains/products/public.service';
 import { CreateProductDto } from './dto/CreateProductDto';
 import { UpdateProductDto } from './dto/UpdateProductDto';
-import { TProducts } from 'src/domains/products/public.types';
+import { TProduct } from 'src/domains/products/public.types';
 import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller(`${AD}/products`)
 export class ProductsController {
   constructor(private readonly productsPublicService: ProductsPublicService) {}
 
-  // @Get('')
-  // async findAll(): Promise<TProducts[]> {
-  //   return await this.productsPublicService.findAll();
-  // }
+  @Get('')
+  async findAll(): Promise<TProduct[]> {
+    return await this.productsPublicService.findAll();
+  }
 
-  // @Get(':id')
-  // async findOneById(@Param('id', ParseIntPipe) id: number): Promise<TProducts> {
-  //   return await this.productsPublicService.findOneById(id);
-  // }
+  @Get(':id')
+  async findOneById(@Param('id', ParseIntPipe) id: number): Promise<TProduct> {
+    return await this.productsPublicService.findOneById(id);
+  }
 
   // @Post('')
   // @UseInterceptors(FileInterceptor('image'))
@@ -53,8 +53,8 @@ export class ProductsController {
   //   });
   // }
 
-  // @Delete(':id')
-  // async delete(@Param('id', ParseIntPipe) id: number): Promise<void> {
-  //   return this.productsPublicService.delete(id);
-  // }
+  @Delete(':id')
+  async delete(@Param('id', ParseIntPipe) id: number): Promise<void> {
+    return this.productsPublicService.delete(id);
+  }
 }

@@ -1,6 +1,6 @@
 import { ProductEntity } from './main/entities/product.entity';
 
-export type TProducts = ProductEntity;
+export type TProduct = ProductEntity;
 
 export type TCreateProduct = Omit<
   ProductEntity,
