@@ -22,22 +22,22 @@ export class ProductEntity {
   @ManyToOne(() => SellerEntity, (seller) => seller.products, {
     onDelete: 'CASCADE',
   })
-  seller: SellerEntity;
+  seller?: SellerEntity;
 
   @ManyToOne(() => CategoryEntity, (category) => category.products)
-  category: CategoryEntity;
+  category?: CategoryEntity;
 
   @ManyToOne(() => BrandEntity, (brand) => brand.products, { nullable: true })
   brand?: BrandEntity;
 
   @OneToMany(() => ProductVariantEntity, (variant) => variant.product)
-  variants: ProductVariantEntity[];
+  variants?: ProductVariantEntity[];
 
   @OneToMany(() => ProductImageEntity, (image) => image.product)
-  images: ProductImageEntity[];
+  images?: ProductImageEntity[];
 
   @OneToMany(() => ProductLinkEntity, (link) => link.product)
-  links: ProductLinkEntity[];
+  links?: ProductLinkEntity[];
 
   @Column({ name: 'title', type: 'varchar', length: 255, nullable: false })
   title: string;

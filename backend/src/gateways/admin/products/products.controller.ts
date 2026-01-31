@@ -31,14 +31,10 @@ export class ProductsController {
     return await this.productsPublicService.findOneById(id);
   }
 
-  // @Post('')
-  // @UseInterceptors(FileInterceptor('image'))
-  // async create(
-  //   @Body() createDto: CreateProductDto,
-  //   @UploadedFile() image: Express.Multer.File,
-  // ): Promise<TProducts> {
-  //   return this.productsPublicService.create({ ...createDto, image });
-  // }
+  @Post('')
+  async create(@Body() body: CreateProductDto): Promise<TProduct> {
+    return this.productsPublicService.create(body);
+  }
 
   // @Patch(':id')
   // @UseInterceptors(FileInterceptor('image'))

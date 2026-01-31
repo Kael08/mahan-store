@@ -4,13 +4,16 @@ export type TProduct = ProductEntity;
 
 export type TCreateProduct = Omit<
   ProductEntity,
-  'id' | 'createdAt' | 'updatedAt'
+  | 'id'
+  | 'createdAt'
+  | 'updatedAt'
+  | 'seller'
+  | 'brand'
+  | 'variants'
+  | 'images'
+  | 'links'
 > & {
-  image: Express.Multer.File;
-};
-
-export type TUpdateProduct = Partial<
-  Omit<ProductEntity, 'id' | 'createdAt' | 'updatedAt'>
-> & {
-  image?: Express.Multer.File;
+  sellerId: number;
+  brandId: number;
+  categoryId: number;
 };
