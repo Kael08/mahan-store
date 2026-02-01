@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { ProductsService } from './main/products.service';
-import { TProduct, TCreateProduct } from './public.types';
+import { TProduct, TCreateProduct, TUpdateProduct } from './public.types';
 
 @Injectable()
 export class ProductsPublicService {
@@ -18,9 +18,9 @@ export class ProductsPublicService {
     return this.productsService.create(data);
   }
 
-  // async update(id: number, data: TUpdateProducts): Promise<TProducts> {
-  //   return this.productsService.update(id, data);
-  // }
+  async update(id: number, data: TUpdateProduct): Promise<TProduct> {
+    return this.productsService.update(id, data);
+  }
 
   async delete(id: number): Promise<void> {
     return this.productsService.delete(id);

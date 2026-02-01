@@ -68,3 +68,8 @@
 - productLinks
 - products
 - productVariants
+
+### 15
+
+- Небольшое исправление багов
+- patch метод для products

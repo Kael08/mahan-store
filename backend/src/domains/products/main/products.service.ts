@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ProductEntity } from './entities/product.entity';
-import { TProduct, TCreateProduct } from '../public.types';
+import { TProduct, TCreateProduct, TUpdateProduct } from '../public.types';
 import { Repository } from 'typeorm';
 import { S3Service } from 'src/common/s3/s3.service';
 import { TSeller } from 'src/domains/sellers/public.types';
@@ -78,23 +78,51 @@ export class ProductsService {
     return this.repo.save(product);
   }
 
-  // async update(id: number, data: TUpdateProduct): Promise<TProducts> {
-  //   let imageUrl: string | undefined;
+  async update(id: number, data: TUpdateProduct): Promise<TProduct> {
+    let seller: TSeller | undefined;
+    let brand: TBrand | undefined;
+    let category: TCategory | undefined;
 
-  //   if (data.image) {
-  //     imageUrl = await this.s3Service.uploadFile(data.image);
-  //     delete (data as any).image;
+    if (data.brandId && data.sellerId && data.categoryId) {
+      const brandExists = await this.brandsPublicService.findOneById(
+        data.brandId,
+      );
+      if (!brandExists) {
+        throw new NotFoundException(`Бренд с id ${data.brandId} не найден`);
+      }
 
-  //     const oldProduct = await this.repo.findOneBy({ id });
-  //     if (oldProduct?.imageUrl) {
-  //       const oldKey = oldProduct.imageUrl.split('/').slice(-1)[0];
-  //       await this.s3Service.deleteFile(oldKey);
-  //     }
-  //   }
+      const sellerExists = await this.sellersPublicService.findOneById(
+        data.sellerId,
+      );
+      if (!sellerExists) {
+        throw new NotFoundException(`Продавец с id ${data.sellerId} не найден`);
+      }
 
-  //   await this.repo.update(id, { ...data, imageUrl });
-  //   return this.repo.findOneByOrFail({ id });
-  // }
+      const categoryExists = await this.categoriesPublicService.findOneById(
+        data.categoryId,
+      );
+      if (!categoryExists) {
+        throw new NotFoundException(
+          `Категория с id ${data.categoryId} не найдена`,
+        );
+      }
+
+      brand = brandExists;
+      seller = sellerExists;
+      category = categoryExists;
+    }
+
+    delete (data as any).brandId;
+    delete (data as any).sellerId;
+    delete (data as any).categoryId;
+
+    await this.repo.update(id, { ...data, brand, seller, category });
+
+    return this.repo.findOneOrFail({
+      where: { id },
+      relations: ['seller', 'category', 'brand'],
+    });
+  }
 
   async delete(id: number): Promise<void> {
     await this.repo.delete(id);

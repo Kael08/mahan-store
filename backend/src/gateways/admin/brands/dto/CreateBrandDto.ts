@@ -4,7 +4,7 @@ export class CreateBrandDto {
   @IsString()
   name: string;
 
-  @IsString()
-  @IsOptional()
-  logoUrl: string;
+  // @IsString()
+  // @IsOptional()
+  // logoUrl: string;
 }

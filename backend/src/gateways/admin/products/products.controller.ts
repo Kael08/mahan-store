@@ -36,18 +36,13 @@ export class ProductsController {
     return this.productsPublicService.create(body);
   }
 
-  // @Patch(':id')
-  // @UseInterceptors(FileInterceptor('image'))
-  // async update(
-  //   @Param('id', ParseIntPipe) id: number,
-  //   @Body() updateDto: UpdateProductDto,
-  //   @UploadedFile() image?: Express.Multer.File,
-  // ): Promise<TProducts> {
-  //   return this.productsPublicService.update(id, {
-  //     ...updateDto,
-  //     image,
-  //   });
-  // }
+  @Patch(':id')
+  async update(
+    @Param('id', ParseIntPipe) id: number,
+    @Body() body: UpdateProductDto,
+  ): Promise<TProduct> {
+    return this.productsPublicService.update(id, body);
+  }
 
   @Delete(':id')
   async delete(@Param('id', ParseIntPipe) id: number): Promise<void> {

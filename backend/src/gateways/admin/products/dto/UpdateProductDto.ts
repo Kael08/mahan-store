@@ -1,11 +1,45 @@
-import { IsString, IsOptional } from 'class-validator';
+import {
+  IsOptional,
+  IsString,
+  IsNumber,
+  IsPositive,
+  Min,
+  IsBoolean,
+} from 'class-validator';
 
 export class UpdateProductDto {
-  @IsOptional()
   @IsString()
-  title?: string;
+  title: string;
 
-  @IsOptional()
   @IsString()
-  description?: string;
+  description: string;
+
+  @IsNumber()
+  @IsPositive()
+  @IsOptional()
+  priceMin: number;
+
+  @IsNumber()
+  @IsPositive()
+  @IsOptional()
+  priceMax: number;
+
+  @IsNumber()
+  @IsPositive()
+  sellerId: number;
+
+  @IsNumber()
+  @IsPositive()
+  brandId: number;
+
+  @IsNumber()
+  @IsPositive()
+  categoryId: number;
+
+  @IsNumber()
+  @Min(0)
+  priorityBoost: number;
+
+  @IsBoolean()
+  isActive: boolean;
 }

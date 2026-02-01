@@ -17,3 +17,19 @@ export type TCreateProduct = Omit<
   brandId: number;
   categoryId: number;
 };
+
+export type TUpdateProduct = Omit<
+  ProductEntity,
+  | 'id'
+  | 'createdAt'
+  | 'updatedAt'
+  | 'seller'
+  | 'brand'
+  | 'variants'
+  | 'images'
+  | 'links'
+> & {
+  sellerId: number;
+  brandId: number;
+  categoryId: number;
+};

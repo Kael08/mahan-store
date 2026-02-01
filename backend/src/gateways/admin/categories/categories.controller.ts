@@ -29,7 +29,7 @@ export class CategoriesController {
     return this.categoriesPublicService.findOneById(id);
   }
 
-  @Delete('')
+  @Delete(':id')
   async delete(@Param('id', ParseIntPipe) id: number) {
     return this.categoriesPublicService.delete(id);
   }
