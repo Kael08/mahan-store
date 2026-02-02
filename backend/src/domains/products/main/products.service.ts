@@ -23,16 +23,32 @@ export class ProductsService {
   ) {}
 
   async findAll(): Promise<TProduct[]> {
-    return this.repo.find({
-      relations: ['seller', 'category', 'brand'],
+    const products = await this.repo.find({
+      relations: ['seller', 'category', 'brand', 'variants', 'images', 'links'],
     });
+
+    // Сортируем изображения по sortOrder для каждого продукта
+    products.forEach((product) => {
+      if (product.images) {
+        product.images.sort((a, b) => a.sortOrder - b.sortOrder);
+      }
+    });
+
+    return products;
   }
 
   async findOneById(id: number): Promise<TProduct> {
-    return this.repo.findOneOrFail({
+    const product = await this.repo.findOneOrFail({
       where: { id },
-      relations: ['seller', 'category', 'brand'],
+      relations: ['seller', 'category', 'brand', 'variants', 'images', 'links'],
     });
+
+    // Сортируем изображения по sortOrder
+    if (product.images) {
+      product.images.sort((a, b) => a.sortOrder - b.sortOrder);
+    }
+
+    return product;
   }
 
   async create(data: TCreateProduct): Promise<TProduct> {

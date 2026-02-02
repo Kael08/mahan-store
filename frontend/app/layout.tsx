@@ -1,6 +1,14 @@
 import Link from 'next/link';
 import { routes } from '@/src/lib/routes';
 import './globals.css';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Arise Fashion - Магазин модной одежды',
+  description:
+    'Arise Fashion — это магазин одежды, созданный молодой командой, которая ценит стиль, качество и актуальность.',
+  keywords: 'одежда, мода, fashion, магазин одежды, Arise Fashion',
+};
 
 export default function RootLayout({
   children,

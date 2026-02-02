@@ -5,6 +5,7 @@ import {
   PutObjectCommand,
   CreateBucketCommand,
   DeleteObjectCommand,
+  PutBucketPolicyCommand,
 } from '@aws-sdk/client-s3';
 
 @Injectable()
@@ -40,8 +41,39 @@ export class S3Service {
   private async ensureBucketExists() {
     try {
       await this.client.send(new CreateBucketCommand({ Bucket: this.bucket }));
+      // Настраиваем публичный доступ к bucket
+      await this.setPublicBucketPolicy();
+    } catch (error: any) {
+      // Bucket уже существует, но все равно настраиваем policy
+      await this.setPublicBucketPolicy().catch(() => {
+        // Игнорируем ошибки при установке policy
+      });
+    }
+  }
+
+  private async setPublicBucketPolicy() {
+    const policy = {
+      Version: '2012-10-17',
+      Statement: [
+        {
+          Effect: 'Allow',
+          Principal: { AWS: ['*'] },
+          Action: ['s3:GetObject'],
+          Resource: [`arn:aws:s3:::${this.bucket}/*`],
+        },
+      ],
+    };
+
+    try {
+      await this.client.send(
+        new PutBucketPolicyCommand({
+          Bucket: this.bucket,
+          Policy: JSON.stringify(policy),
+        }),
+      );
     } catch (error) {
-      // Bucket уже существует
+      // Игнорируем ошибки при установке policy
+      // MinIO может требовать дополнительных настроек
     }
   }
 
@@ -54,6 +86,7 @@ export class S3Service {
         Key: filename,
         Body: file.buffer,
         ContentType: file.mimetype,
+        ACL: 'public-read',
       }),
     );
 
