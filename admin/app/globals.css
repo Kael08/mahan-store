@@ -12,15 +12,46 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer components {
+  .admin-container {
+    @apply min-h-screen max-w-7xl mx-auto px-4 py-8;
+  }
+
+  .admin-card {
+    @apply bg-white rounded-lg shadow-sm border border-gray-200 p-6;
+  }
+
+  .admin-button-primary {
+    @apply bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition-colors font-medium;
+  }
+
+  .admin-button-secondary {
+    @apply bg-gray-100 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-200 transition-colors font-medium;
+  }
+
+  .admin-button-danger {
+    @apply bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors font-medium;
+  }
+
+  .admin-input {
+    @apply w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent;
+  }
+
+  .admin-label {
+    @apply block text-sm font-medium text-gray-700 mb-2;
+  }
+
+  .admin-navbar {
+    @apply bg-zinc-900 sticky top-0 z-10;
+  }
+
+  .admin-navbar-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center;
+  }
 }
