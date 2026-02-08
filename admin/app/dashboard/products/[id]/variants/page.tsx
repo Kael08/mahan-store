@@ -53,6 +53,7 @@ export default function ProductVariantsPage() {
     try {
       if (editingVariant) {
         await api.patch(`/AD/productVariants/${editingVariant.id}`, {
+          productId,
           ...formData,
           price: Number(formData.price),
         });

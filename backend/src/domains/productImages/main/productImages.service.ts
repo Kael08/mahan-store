@@ -63,4 +63,10 @@ export class ProductImagesService {
   async delete(id: number): Promise<void> {
     await this.repo.delete(id);
   }
+
+  async changeMainImage(imageId: number, productId: number): Promise<void> {
+    await this.repo.update({ product: { id: productId } }, { isMain: false });
+
+    await this.repo.update(imageId, { isMain: true });
+  }
 }

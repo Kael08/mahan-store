@@ -34,7 +34,7 @@ export class ProductVariantsController {
     const userProductIds = userProducts
       .filter((p) => p.seller?.id === user.id)
       .map((p) => p.id);
-    return variants.filter((v) => userProductIds.includes(v.productId));
+    return variants.filter((v) => userProductIds.includes(v.product.id));
   }
 
   @Get(':id')
@@ -44,7 +44,7 @@ export class ProductVariantsController {
   ) {
     const variant = await this.productVariantsPublicService.findOneById(id);
     const product = await this.productsPublicService.findOneById(
-      variant.productId,
+      variant.product.id,
     );
     if (product.seller?.id !== user.id) {
       throw new ForbiddenException('Нет доступа к этому варианту');
@@ -75,7 +75,7 @@ export class ProductVariantsController {
   ) {
     const variant = await this.productVariantsPublicService.findOneById(id);
     const product = await this.productsPublicService.findOneById(
-      variant.productId,
+      variant.product.id,
     );
     if (product.seller?.id !== user.id) {
       throw new ForbiddenException('Нет доступа к этому варианту');
@@ -90,11 +90,16 @@ export class ProductVariantsController {
   ) {
     const variant = await this.productVariantsPublicService.findOneById(id);
     const product = await this.productsPublicService.findOneById(
-      variant.productId,
+      variant.product.id,
     );
     if (product.seller?.id !== user.id) {
       throw new ForbiddenException('Нет доступа к этому варианту');
     }
-    return this.productVariantsPublicService.delete(id);
+    await this.productVariantsPublicService.delete(id);
+
+    return {
+      success: true,
+      message: 'Вариант товара успешно удален',
+    };
   }
 }

@@ -9,6 +9,7 @@ import {
 import { AD } from '../admin.const';
 import { LoginDto } from './dto/loginDto';
 import { AuthService } from 'src/domains/auth/auth.service';
+import { RefreshDto } from './dto/refreshDto';
 
 @Controller(`${AD}/auth`)
 export class AuthController {
@@ -26,6 +27,17 @@ export class AuthController {
       }
 
       throw new UnauthorizedException('Ошибка авторизации');
+    }
+  }
+
+  @Post('refresh')
+  @UsePipes(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true }))
+  async refresh(@Body() dto: RefreshDto) {
+    try {
+      const tokens = await this.authService.refresh(dto.refreshToken);
+      return tokens;
+    } catch (error) {
+      throw new UnauthorizedException('Недействительный refresh-токен');
     }
   }
 }

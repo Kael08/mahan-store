@@ -21,4 +21,8 @@ export class ProductImagesPublicService {
   async delete(id: number): Promise<void> {
     return this.service.delete(id);
   }
+
+  async changeMainImage(imageId: number, productId: number): Promise<void> {
+    return this.service.changeMainImage(imageId, productId);
+  }
 }

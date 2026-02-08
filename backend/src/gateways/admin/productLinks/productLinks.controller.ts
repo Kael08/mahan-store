@@ -27,12 +27,11 @@ export class ProductLinksController {
   @Get('')
   async findAll(@CurrentUser() user: { id: number }) {
     const links = await this.productLinksPublicService.findAll();
-    // Фильтруем ссылки по товарам текущего пользователя
     const userProducts = await this.productsPublicService.findAll();
     const userProductIds = userProducts
       .filter((p) => p.seller?.id === user.id)
       .map((p) => p.id);
-    return links.filter((link) => userProductIds.includes(link.productId));
+    return links.filter((link) => userProductIds.includes(link.product.id));
   }
 
   @Get(':id')
@@ -42,7 +41,7 @@ export class ProductLinksController {
   ) {
     const link = await this.productLinksPublicService.findOneById(id);
     const product = await this.productsPublicService.findOneById(
-      link.productId,
+      link.product.id,
     );
     if (product.seller?.id !== user.id) {
       throw new ForbiddenException('Нет доступа к этой ссылке');
@@ -55,7 +54,6 @@ export class ProductLinksController {
     @Body() body: CreateProductLinkDto,
     @CurrentUser() user: { id: number },
   ) {
-    // Проверяем, что товар принадлежит текущему пользователю
     const product = await this.productsPublicService.findOneById(
       body.productId,
     );
@@ -72,11 +70,16 @@ export class ProductLinksController {
   ) {
     const link = await this.productLinksPublicService.findOneById(id);
     const product = await this.productsPublicService.findOneById(
-      link.productId,
+      link.product.id,
     );
     if (product.seller?.id !== user.id) {
       throw new ForbiddenException('Нет доступа к этой ссылке');
     }
-    return this.productLinksPublicService.delete(id);
+    await this.productLinksPublicService.delete(id);
+
+    return {
+      success: true,
+      message: 'Ссылка успешно удалена',
+    };
   }
 }

@@ -7,6 +7,7 @@ import type { Metadata } from 'next';
 import BrandLogo from '../../components/BrandLogo';
 import AvatarImage from '../../components/AvatarImage';
 import ImageGallery from '../../components/ImageGallery';
+import ProductDescription from '../../components/ProductDescripition';
 
 async function getProduct(id: string): Promise<TProduct | null> {
   try {
@@ -162,14 +163,7 @@ export default async function ProductDetailPage({
 
             {/* Описание */}
             {product.description && (
-              <div className="prose max-w-none">
-                <h3 className="text-lg font-semibold mb-2 text-gray-900">
-                  Описание
-                </h3>
-                <p className="text-gray-700 leading-relaxed whitespace-pre-line">
-                  {product.description}
-                </p>
-              </div>
+              <ProductDescription description={product.description} />
             )}
 
             {/* Варианты */}

@@ -70,23 +70,25 @@ export default function ProductImagesPage() {
     }
   };
 
-  const handleSetMain = async (id: number) => {
+  const handleSetMain = async (imageId: number) => {
     if (!confirm('Сделать это изображение главным?')) {
       return;
     }
 
     try {
-      // Находим текущее главное изображение
-      const currentMain = images.find((img) => img.isMain);
-
-      // Удаляем старое главное и создаем новое с флагом isMain
-      // Для этого нужно удалить текущее главное и пересоздать выбранное
-      // Пока просто показываем сообщение, что нужно удалить и создать заново
-      setError(
-        'Для изменения главного изображения удалите текущее главное и загрузите новое с флагом "Главное"'
+      setError('');
+      // Вызываем API для изменения главного изображения
+      await api.patch(
+        `/AD/productImages/${imageId}/change-main-product-image`,
+        {
+          productId: productId,
+        }
       );
+
+      // Перезагружаем данные, чтобы увидеть обновления
+      await loadData();
     } catch (err: any) {
-      setError(err.message || 'Ошибка обновления');
+      setError(err.message || 'Ошибка обновления главного изображения');
     }
   };
 
