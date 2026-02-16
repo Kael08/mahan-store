@@ -13,6 +13,6 @@ export class BrandsController {
 
   @Get(':id')
   async findOneById(@Param('id', ParseIntPipe) id: number) {
-    return this.findOneById(id);
+    return this.brandsPublicService.findOneById(id);
   }
 }
